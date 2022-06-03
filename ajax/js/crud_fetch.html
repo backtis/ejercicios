@@ -1,0 +1,201 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>crud api rest fetch</h1>
+
+    <section class="crud">
+        <article>
+            <h2 class="crud-title"> agrgar tema</h2>
+            <form class="crud-form">
+                <input type="text" name="tema" placeholder="tema" required >
+                <br>
+                <input type="text" name="disco" placeholder="disco" required>
+                <br>
+                <input type="submit" value="enviar">
+                <input type="hidden" name="id">
+            </form>
+
+        </article>
+        <article>
+            <h2>ver tema</h2>
+            <table class="crud-table">
+                <thead>
+                    <tr>
+                        <th>tema</th>
+                        <th>disco</th>
+                        <th>acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <!-- -->
+
+                </tbody>
+            </table>
+        </article>
+    </section>
+    <template id="crud-template">
+
+        <tr>
+            <td class="disco"></td>
+            <td class="tema"></td>
+            <td>
+                <button class="edit">editar</button>
+                <button class="delete">eliminar</button>
+            </td>
+        </tr> 
+
+    </template>
+
+    <script>
+        const d = document,
+            $table = d.querySelector(".crud-table"),
+            $form = d.querySelector(".crud-form"),
+            $title = d.querySelector(".crud-title"),
+            $template = d.getElementById("crud-template").content,
+            $fragment = d.createDocumentFragment();
+
+
+            const getAll = async () => {
+                try{
+                    let res = await fetch("http://localhost:3000/fundamentalistas"),// no get metodo por defecto
+                    json = await res.json()
+
+                    if (!res.ok) throw {status: res.status, statusText: res.statusText}
+                    console.log(json)
+                    console.log(res)
+                    console.log(res.ok)
+
+
+                    json.forEach(el =>{
+                            $template.querySelector(".disco").textContent = el.disco
+                            $template.querySelector(".tema").textContent = el.tema
+                            $template.querySelector(".edit").dataset.id = el.id
+                            $template.querySelector(".edit").dataset.disco = el.disco
+                            $template.querySelector(".edit").dataset.tema = el.tema
+                            $template.querySelector(".delete").dataset.id = el.id
+
+                            let $clone = d.importNode($template, true)
+                            $fragment.appendChild($clone)
+                    })
+                    $table.querySelector("tbody").appendChild($fragment)
+                }catch(err){
+                    let message = err.statusText || "ocurrio un error"
+                    $table.insertAdjacentHTML("afterend", `<p><b>error ${err.status}: ${message}</b></p>`)
+
+                }
+            }
+
+
+            d.addEventListener("DOMContentLoaded", getAll)
+
+            d.addEventListener("submit", async (e) => {
+                if(e.target === $form){
+                    e.preventDefault()
+
+                    if(!e.target.id.value){
+
+                        //create
+                        try{
+                            let options = {
+                                method: "POST",
+                                headers: {
+                                    "Content-type": "application/json; charset=utf-8"
+                                },
+                                body: JSON.stringify({
+                                    disco: e.target.disco.value,
+                                    tema: e.target.tema.value
+                                })
+                            },
+                             res = await fetch("http://localhost:3000/fundamentalistas", options),
+                             json = await res.json()
+
+                             if (!res.ok) throw {status: res.status, statusText: res.statusText}
+
+                             location.reload()
+
+                        }catch (error){
+                            let message = err.statusText || "ocurrio un error";
+                            $form.insertAdjacentHTML("afterend", `<p><b>error ${err.status}: ${message}<b><p>`)
+                        }
+
+                    }else{
+                        //update
+                        try{
+                            let options = {
+                                method: "PUT",
+                                headers: {
+                                    "Content-type": "application/json; charset=utf-8"
+                                },
+                                body: JSON.stringify({
+                                    disco: e.target.disco.value,
+                                    tema: e.target.tema.value
+                                })
+                            },
+                            res = await fetch(`http://localhost:3000/fundamentalistas/${e.target.id.value}`, options),
+                            json = await res.json()
+
+                            if (!res.ok) throw {status: res.status, statusText: res.statusText}
+
+                            location.reload()
+
+
+                        }catch (error){
+                            let message = err.statusText || "ocurrio un error"
+                            $form.insertAdjacentHTML("afterend", `<p><b> error ${err.status}: ${message}</b></p>`)
+
+                        }
+
+                    }
+                }
+
+            })
+
+
+
+            d.addEventListener("click", async e =>{
+                if(e.target.matches(".edit")){
+                    $title.textContent = "editar santo"
+                    $form.disco.value = e.target.dataset.disco
+                    $form.tema.value = e.target.dataset.tema
+                    $form.id.value = e.target.dataset.id
+                }
+
+                if(e.target.matches(".delete")){
+                    let isDelete = confirm(`vas a eliminar el id? ${e.target.dataset.id}`)
+
+                    if(isDelete){
+                        // delete
+                        try{
+                        let options = {
+                            method: "DELETE",
+                            headers: {
+                                "Content-type": "application/json; charset=utf-8"
+                            }
+                        },
+                        res = await fetch(`http://localhost:3000/fundamentalistas/${e.target.dataset.id}`, options),
+                        json = await res.json()
+
+                        if (!res.ok) throw {status: res.status, statusText: res.statusText}
+
+                        //location.reload()
+                        }catch (error){
+                            let message = err.statusText || "ocurrio un error"
+                            $form.insertAdjacentHTML("afterend", `<p><b> error ${err.status}: ${message}</b></p>`)
+
+                        }
+
+                    }
+                }
+            })
+
+
+
+
+            
+    </script>
+</body>
+</html>

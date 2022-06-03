@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>wp rest api</h1>
+
+    <article id="site" class="site"></article>
+    <section id="posts" class="posts"></section>
+    <img class="loader" src="../assets/load.png" alt="cargando...">
+    <template id="post-template">
+        <article class="post">
+            <img class="post-img">
+            <aside>
+                <h2 class="post-title"></h2>
+                <figure class="posts-author"></figure>
+                <small class="post-date"></small>
+                <a class="post-link" target="_blank">ver publicacion original</a>
+                <p class="post-excerpt"></p>
+                <div class="post-categories"></div>
+                <div class="post-tags"></div>
+                <details class="post-content">
+                    <summary></summary>
+                </details>
+
+            </aside>
+        </article>
+    </template>
+
+   <script>
+   
+   fetch("https://malvestida.com/wp-json")
+    .then(res => res.ok ? res.json() : Promise.reject(res))
+    .then(json =>{
+        console.log(json)
+    })
+
+</script>
+
+
+
+</body>
+</html>

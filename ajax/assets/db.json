@@ -1,0 +1,81 @@
+{
+  "redondos": [
+    {
+      "id": 1,
+      "disco": "gulp",
+      "tema": "El Infierno Está Encantador Esta Noche"
+    },
+    {
+      "id": 2,
+      "disco": "oktubre",
+      "tema": "Motor Psico"
+    },
+    {
+      "id": 3,
+      "disco": "Un Baión para el ojo idiota",
+      "tema": "Vencedores vencidos"
+    },
+    {
+      "id": 4,
+      "disco": "¡Bang! ¡Bang!... Estás liquidado",
+      "tema": " Nuestro amo juega al esclavo"
+    },
+    {
+      "id": 5,
+      "disco": "La Mosca Y La Sopa",
+      "tema": "El pibe de los astilleros"
+    },
+    {
+      "id": 6,
+      "disco": "Lobo Suelto, Cordero Atado, Vol. 1",
+      "tema": "Buenas noticias"
+    },
+    {
+      "id": 7,
+      "disco": "Lobo Suelto, Cordero Atado, Vol. 2",
+      "tema": "¡Es hora de levantarse, querido! (¿dormiste bien?)"
+    },
+    {
+      "id": 8,
+      "disco": "Luzbelito",
+      "tema": "Nuotatori professionisti"
+    },
+    {
+      "id": 9,
+      "disco": "Último Bondi a Finisterre",
+      "tema": "Alien Duce"
+    },
+    {
+      "id": 10,
+      "disco": "Momo Sampler",
+      "tema": "Pool, Averna y Papusa"
+    }
+  ],
+  "fundamentalistas": [
+    {
+      "id": 1,
+      "disco": "el tesoro de los inocentes",
+      "tema": "el tesoro"
+    },
+    {
+      "id": 2,
+      "disco": "Porco rex",
+      "tema": "Te Estás Quedando sin Balas de Plata"
+    },
+    {
+      "disco": "Pajaritos, bravos muchachitos",
+      "tema": "jh",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "disco": "El ruiseñor, el amor y la muerte",
+      "tema": "amok amok"
+    },
+    {
+      "disco": "dft",
+      "tema": "df",
+      "id": 6
+    }
+  ]
+}
