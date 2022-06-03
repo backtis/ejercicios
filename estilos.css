@@ -271,7 +271,7 @@ height: auto;
 }
 
 .card figcaption{
-	/*padding: 5px;*/
+	/**/padding: 5px;
 }
 
 .filter{
@@ -393,7 +393,7 @@ height: auto;
 
 	.menu a:hover,
 	.menu .active{
-		color: var(--main-color)
+		color: var(--main-color);
 		background-color: var(--main-color);
 
 	}
